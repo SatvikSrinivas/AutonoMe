@@ -5,6 +5,7 @@ import Slider from '@react-native-community/slider';
 import { useState } from 'react';
 import { round } from '../components/display';
 import { colors } from '../theme';
+import { screenIsShort } from '../components/device';
 
 import educationImage from '../assets/categories/education.png';
 import entertainmentImage from '../assets/categories/entertainment.png';
@@ -19,7 +20,7 @@ export function SettingsScreen() {
         W = 0.9 * width, L = (width - W) / 2;
 
     var margY = 0.0625 * bodyHeight, margTop = 0.7 * margY
-    if (height < 800) { // Dimension Changes For iPhoneSE (Smaller Screen Height)
+    if (screenIsShort()) { // Dimension Changes For iPhoneSE (Smaller Screen Height)
         margTop = 0.5 * margY;
         margY = marg;
     }

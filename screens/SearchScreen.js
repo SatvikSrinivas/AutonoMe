@@ -42,6 +42,7 @@ import fitnessImage from '../assets/categories/fitness.png';
 import mindfulnessImage from '../assets/categories/mindfulness.png';
 import motivationImage from '../assets/categories/motivation.png';
 import randomImage from '../assets/categories/random.png';
+import { screenIsShort } from '../components/device';
 
 const categoryImages = {
     Education: educationImage,
@@ -58,11 +59,18 @@ export function SearchScreen() {
     const numCols = 2, imgScale = 0.6;
     const imgSize = imgScale * ((width - (numCols + 1) * 0.05 * width) / numCols);
 
+    var marg = 0.5 * imgSize, margY = 0.25 * imgSize, slightOffset = 0.4 * margY;
+    if (screenIsShort()) {
+        marg = 0.525 * imgSize;
+        margY = 0.15 * imgSize;
+        slightOffset = -0.25 * marg
+    }
+
     return (
         <ScreenWrapper>
-            <BackButton />
-            <View>
-                <Text style={{ textAlign: 'center' }} className="font-bold text-4xl">Explore</Text>
+            <View style={{ marginTop: slightOffset }} className="flex-row">
+                <BackButton />
+                <Text style={{ marginBottom: margY, marginTop: margY, marginLeft: 1.5 * marg, textAlign: 'center' }} className="font-bold text-4xl">Explore</Text>
             </View>
             <View className="space-y-1 mx-2 my-2">
                 <TextInput value={search} onChangeText={value => setSearch(value)} className={`${colors.heading} p-4 bg-white rounded-full mb-3`} />

@@ -1,22 +1,17 @@
 import { Dimensions, Text, View, TouchableOpacity, Image } from 'react-native';
 import ScreenWrapper from '../components/screenWrapper';
 import { colors } from '../theme';
-import { auth } from '../config/firebase';
-import { signOut } from 'firebase/auth';
-import { showErrorMessage } from '../components/showErrorMessage';
 import { useNavigation } from '@react-navigation/native';
+import { screenIsShort } from '../components/device';
 
 export function HomeScreen() {
 
-    const handleLogOut = async () => {
-        try {
-            await signOut(auth);
-        } catch (err) {
-            showErrorMessage(err);
-        }
-    }
-
     const { width, height } = Dimensions.get('window'), logoDim = 0.1725 * width, sep = (width - 5 * logoDim) / 6;
+
+    var margTop = 3.25 * sep
+    if (screenIsShort())
+        margTop = 0
+
     const navigation = useNavigation();
 
     return (
@@ -24,11 +19,8 @@ export function HomeScreen() {
             alignItems: 'center',
         }}>
             <ScreenWrapper>
-                <View className="flex-row justify-between items-center p-4">
-                    <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>AutonoMe</Text>
-                    <TouchableOpacity onPress={handleLogOut} className="p-2 px-3 bg-white border-gray-200 rounded-full">
-                        <Text className="font-bold">Log Out</Text>
-                    </TouchableOpacity>
+                <View style={{ marginTop: margTop }} className="text-center justify-between items-center my-2">
+                    <Text className={`${colors.heading} font-bold text-4xl shadow-sm`}>AutonoMe</Text>
                 </View>
                 <View style={{
                     justifyContent: 'center',
