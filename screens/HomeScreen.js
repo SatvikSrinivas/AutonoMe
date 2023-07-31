@@ -3,12 +3,13 @@ import ScreenWrapper from '../components/screenWrapper';
 import { colors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { screenIsShort } from '../components/device';
+import { Clock } from '../components/clock';
+import { AutonoMe } from '../components/autonoMe';
 
 export function HomeScreen() {
 
     const { width, height } = Dimensions.get('window'), logoDim = 0.1725 * width, sep = (width - 5 * logoDim) / 6;
-
-    var margTop = 3.25 * sep
+    var margTop = 3.25 * sep, margLeft = 0.5 * margTop;
     if (screenIsShort())
         margTop = 0
 
@@ -19,8 +20,14 @@ export function HomeScreen() {
             alignItems: 'center',
         }}>
             <ScreenWrapper>
-                <View style={{ marginTop: margTop }} className="text-center justify-between items-center my-2">
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center', // Center the content vertically
+                    alignItems: 'center', // Center the content horizontally
+                }} >
+                    <AutonoMe />
                     <Text className={`${colors.heading} font-bold text-4xl shadow-sm`}>AutonoMe</Text>
+                    <Clock />
                 </View>
                 <View style={{
                     justifyContent: 'center',

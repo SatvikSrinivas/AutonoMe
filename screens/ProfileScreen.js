@@ -2,7 +2,7 @@
 import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth, startTimeRef } from '../config/firebase';
 import { signOut } from 'firebase/auth';
 import { showErrorMessage } from '../components/showErrorMessage';
 import ScreenWrapper from '../components/screenWrapper';

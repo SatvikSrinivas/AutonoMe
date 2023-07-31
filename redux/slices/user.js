@@ -12,10 +12,10 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user = action.payLoad
+            state.user = action.payload
         },
         setUserLoading: (state, action) => {
-            state.userLoading = action.payLoad
+            state.userLoading = action.payload
         }
     },
 })
