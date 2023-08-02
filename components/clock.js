@@ -1,8 +1,9 @@
-import { Dimensions, TouchableOpacity, View, Image } from 'react-native';
+import { Dimensions, TouchableOpacity, View, Image, Text } from 'react-native';
 import { screenIsShort } from './device';
 import { auth } from '../config/firebase';
-import { query, where, getDocs } from 'firebase/firestore';
+import { getDoc, doc } from 'firebase/firestore';
 import { startTimeRef } from '../config/firebase';
+import { showTime } from './showMessage';
 
 export function Clock() {
 
@@ -14,14 +15,10 @@ export function Clock() {
         margRight = 0.3 * clockDim;
     }
 
-    showTime = async () => {
-        const q = query(startTimeRef, where('userId', '==', auth.currentUser.uid));
-        const querySnapshot = await getDocs(q);
-        var startTimeInSeconds = 0;
-        querySnapshot.forEach(doc => {
-            startTimeInSeconds = Math.max(startTimeInSeconds, doc.data().startTime.seconds);
-        })
-        console.warn("elapsedTime : " + (getTimeFormatted((new Date().getTime() / 1000) - startTimeInSeconds)));
+    displayTime = async () => {
+        var startTimeInSeconds = (await getDoc(doc(startTimeRef, auth.currentUser.uid))).data().startTime.seconds,
+            time = (getTimeFormatted((new Date().getTime() / 1000) - startTimeInSeconds));
+        showTime(time);
     }
 
     function getTimeFormatted(seconds) {
@@ -38,7 +35,7 @@ export function Clock() {
 
     return (
         <View style={{ position: 'absolute', top: 0, right: 0 }}>
-            <TouchableOpacity onPress={() => showTime()}>
+            <TouchableOpacity onPress={displayTime}>
                 <Image style={{ marginTop: margTop, marginRight: margRight, width: clockDim, height: clockDim }} source={require('../assets/icons/clock.png')} />
             </TouchableOpacity>
         </View>

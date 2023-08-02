@@ -5,7 +5,7 @@ import { colors } from '../theme';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { Loading } from '../components/loading';
-import { showErrorMessage } from '../components/showErrorMessage';
+import { showErrorMessage } from '../components/showMessage';
 
 export function SignUpScreen() {
 

@@ -2,17 +2,12 @@ import { Dimensions, Text, View, TouchableOpacity, Image } from 'react-native';
 import ScreenWrapper from '../components/screenWrapper';
 import { colors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
-import { screenIsShort } from '../components/device';
 import { Clock } from '../components/clock';
 import { AutonoMe } from '../components/autonoMe';
 
 export function HomeScreen() {
 
     const { width, height } = Dimensions.get('window'), logoDim = 0.1725 * width, sep = (width - 5 * logoDim) / 6;
-    var margTop = 3.25 * sep, margLeft = 0.5 * margTop;
-    if (screenIsShort())
-        margTop = 0
-
     const navigation = useNavigation();
 
     return (

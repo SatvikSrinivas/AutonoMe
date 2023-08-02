@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, startTimeRef } from '../config/firebase';
 import { signOut } from 'firebase/auth';
-import { showErrorMessage } from '../components/showErrorMessage';
+import { showErrorMessage } from '../components/showMessage';
 import ScreenWrapper from '../components/screenWrapper';
 import { BackButton } from '../components/backButton';
 import { colors } from '../theme';

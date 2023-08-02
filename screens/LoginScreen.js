@@ -5,21 +5,17 @@ import { colors } from '../theme';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { Loading } from '../components/loading';
-import { showErrorMessage } from '../components/showErrorMessage';
-import { addDoc} from 'firebase/firestore';
-import { startTimeRef} from '../config/firebase';
+import { showErrorMessage } from '../components/showMessage';
+import { doc, setDoc } from 'firebase/firestore';
+import { startTimeRef } from '../config/firebase';
 
 export function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const storeStartTime = async () => {
-        try {
-            let doc = await addDoc(startTimeRef, { startTime: new Date(), userId: auth.currentUser.uid });
-        } catch (err) {
-            showErrorMessage(err);
-        }
+    function updateStartTime() {
+        setDoc(doc(startTimeRef, auth.currentUser.uid), { startTime: new Date() });
     }
 
     const handleLogin = async () => {
@@ -28,7 +24,7 @@ export function LoginScreen() {
                 setLoading(true);
                 await signInWithEmailAndPassword(auth, email, password);
                 setLoading(false);
-                storeStartTime(); // Stores startTime in Firebase
+                updateStartTime();
             } catch (err) {
                 setLoading(false);
                 showErrorMessage(err);
