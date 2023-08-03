@@ -27,7 +27,8 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-export const startTimeRef = collection(db, 'startTimeRef')
+export const startTimeRef = collection(db, 'startTimeRef');
+export const ratingsRef = collection(db, 'ratingsRef');
 
 // export const dummyRef = collection(db, 'dummyRef')
 

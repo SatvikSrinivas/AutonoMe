@@ -9,14 +9,14 @@ import { showErrorMessage } from '../components/showMessage';
 import { doc, setDoc } from 'firebase/firestore';
 import { startTimeRef } from '../config/firebase';
 
+export function saveStartTime() {
+    setDoc(doc(startTimeRef, auth.currentUser.uid), { startTime: new Date() });
+}
+
 export function LoginScreen() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
-    function updateStartTime() {
-        setDoc(doc(startTimeRef, auth.currentUser.uid), { startTime: new Date() });
-    }
 
     const handleLogin = async () => {
         if (email && password) {
@@ -24,7 +24,7 @@ export function LoginScreen() {
                 setLoading(true);
                 await signInWithEmailAndPassword(auth, email, password);
                 setLoading(false);
-                updateStartTime();
+                saveStartTime();
             } catch (err) {
                 setLoading(false);
                 showErrorMessage(err);

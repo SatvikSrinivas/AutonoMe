@@ -6,6 +6,9 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import { Loading } from '../components/loading';
 import { showErrorMessage } from '../components/showMessage';
+import { doc, setDoc } from 'firebase/firestore';
+import { ratingsRef } from '../config/firebase';
+import { saveStartTime } from '../screens/LoginScreen';
 
 export function SignUpScreen() {
 
@@ -13,12 +16,25 @@ export function SignUpScreen() {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
+    setDefaultRatingsToZero = async () => {
+        setDoc(doc(ratingsRef, auth.currentUser.uid),
+            {
+                education: 0,
+                entertainment: 0,
+                fitness: 0,
+                mindfulness: 0,
+                motivation: 0
+            });
+    }
+
     const handleSignUp = async () => {
         if (email && password) {
             try {
                 setLoading(true);
                 await createUserWithEmailAndPassword(auth, email, password);
                 setLoading(false);
+                saveStartTime();
+                setDefaultRatingsToZero();
             } catch (err) {
                 setLoading(false);
                 showErrorMessage(err);
