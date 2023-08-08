@@ -14,8 +14,8 @@ export function saveStartTime() {
 }
 
 export function LoginScreen() {
-    const [email, setEmail] = useState('test@gmail.com');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
