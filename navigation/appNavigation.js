@@ -9,6 +9,7 @@ import { ProfileScreen } from '../screens/ProfileScreen';
 import { SearchScreen } from '../screens/SearchScreen';
 import { CreateScreen } from '../screens/CreateScreen';
 import { TrackScreen } from '../screens/TrackScreen';
+import { CameraScreen } from '../screens/Camera/CameraScreen';
 import { auth } from '../config/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';
@@ -36,6 +37,7 @@ export function AppNavigation() {
           <Stack.Screen options={{ headerShown: false }} name="Search" component={SearchScreen} />
           <Stack.Screen options={{ headerShown: false }} name="Create" component={CreateScreen} />
           <Stack.Screen options={{ headerShown: false }} name="Track" component={TrackScreen} />
+          <Stack.Screen options={{ headerShown: false }} name="Camera" component={CameraScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
